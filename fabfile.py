@@ -460,6 +460,7 @@ def install_node(cn, node_num):
 
 
 ### DEMO
+# fab gridinit:foo
 # fab gridmake:foo,2
 # fab gridgrow:foo,2
 # fab gridlist
