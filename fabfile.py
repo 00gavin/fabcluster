@@ -225,12 +225,12 @@ def gridmake(cn='fab',howmany=0,ami='ami-e565ba8c',itype='t1.micro'):
 
     # install grid engine master
     run('mkdir -p /usr/global')
-    put('ge2011.11-x64.tar.gz', '/usr/global/')
+    put('ge2011.11.tar.gz', '/usr/global/')
     put('fabgrid.conf', '/usr/global/')
     run('adduser -u 186 sgeadmin')
     run('sed -i.bak -e\'s/FAB/'+cn+'/g\' /usr/global/fabgrid.conf')
     with cd('/usr/global'):
-        run('tar xzf ge2011.11-x64.tar.gz')
+        run('tar xzf ge2011.11.tar.gz')
 	run('ln -s ge2011.11 sge')
         run('chown -R sgeadmin.sgeadmin /usr/global/sge/')
     with cd('/usr/global/sge'):
@@ -456,16 +456,16 @@ def install_node(cn, node_num):
 	with settings(warn_only=True):
 	    run('./inst_sge -x -noremote -auto /usr/global/fabgrid.conf >/usr/global/tmp/inst_sge.'+node+'.out 2>&1')
 
-    ## sync auth
-    #env.host_string=qmaster.dns_name
-    #run('rsync /etc/passwd /etc/shadow /etc/group /etc/hosts '+node+':/etc/')
+    # sync auth
+    env.host_string=qmaster.dns_name
+    run('rsync /etc/passwd /etc/shadow /etc/group /etc/hosts '+node+':/etc/')
 
 
 ### TODO
-# compare dell and amazon specs w/ IOzone
+# compare local hardware and amazon specs w/ IOzone
 # calc rack power cost + cooling + facility space + etc
 # build and sync complete /etc/hosts on all hosts for mpi
-# no nfs for SGE
+# is it possble to user no nfs for grid engine jobs?
 # gridstop gridstart suspend/resume or shutdown/boot a cluster
 # gridshrink by N nodes
 # gridoffline a specific node
@@ -474,7 +474,6 @@ def install_node(cn, node_num):
 # gridssh node shell
 # gridcmd node command
 # EBS volume with pre-built software
-# github with all files and blog
 
 
 ### DEMO
@@ -482,7 +481,7 @@ def install_node(cn, node_num):
 # fab gridmake:foo,2
 # fab gridgrow:foo,2
 # fab gridlist
-# ssh ec2-107-22-114-116.compute-1.amazonaws.com
+# ssh ec2-NNN-NN-NNN-NNN.compute-1.amazonaws.com
 # qstat -g c
 # qstat -F explain
 # su - bug
