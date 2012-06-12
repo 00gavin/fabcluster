@@ -461,21 +461,6 @@ def install_node(cn, node_num):
     run('rsync /etc/passwd /etc/shadow /etc/group /etc/hosts '+node+':/etc/')
 
 
-### TODO
-# compare local hardware and amazon specs w/ IOzone
-# calc rack power cost + cooling + facility space + etc
-# build and sync complete /etc/hosts on all hosts for mpi
-# is it possble to user no nfs for grid engine jobs?
-# gridstop gridstart suspend/resume or shutdown/boot a cluster
-# gridshrink by N nodes
-# gridoffline a specific node
-# load matlab
-# luster / gluster
-# gridssh node shell
-# gridcmd node command
-# EBS volume with pre-built software
-
-
 ### DEMO
 # fab gridinit:foo
 # fab gridmake:foo,2
